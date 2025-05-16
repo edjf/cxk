@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!-- 声明文档类型为 HTML5，告知浏览器按照 HTML5 标准解析此文档 -->
+
+<html lang="en">
+<!-- HTML 文档的根标签，lang="en" 表示页面主要使用英语 -->
+
+<head>
+    <!-- 包含文档的元数据，如字符编码、页面标题、引入的外部资源等，不会在页面上直接显示 -->
+    <meta charset="UTF-8">
+    <!-- 设置文档的字符编码为 UTF - 8，确保页面能正确显示各种语言字符 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 用于响应式设计，使页面在不同设备上能正确缩放显示，根据设备屏幕宽度进行缩放 -->
+    <title>代码助手</title>
+    <!-- 设置网页的标题，会显示在浏览器的标签栏上 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- 从 Google Fonts 引入 Inter 字体，字体粗细为 400 (正常) 和 600 (半粗体) -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 链接外部 CSS 文件 style.css，用于设置页面的样式 -->
+</head>
+<body>
+    <div class="main-container">
+        <!-- 左侧面板 -->
+        <div class="left-panel">
+            <div class="upload-panel" id="upload-panel">
+                <div class="upload-header">
+                    <span>文件上传</span>
+                </div>
+                <div class="upload-content">
+                    <label for="file-upload" class="upload-area" title="点击上传文件">
+                        <div class="upload-icon">+</div>
+                        <div class="upload-text">点击上传文件</div>
+                    </label>
+                    <input type="file" id="file-upload" multiple style="display: none;" />
+                </div>
+            </div>
+            
+            <div class="files-panel" id="files-panel">
+                <div class="files-header">
+                    <span>文件列表</span>
+                    <button class="toggle-files-btn" id="toggle-files-btn" title="收起/展开文件列表">
+                        <span class="toggle-icon">◀</span>
+                    </button>
+                </div>
+                <div class="files-list" id="files-list">
+                    <div class="empty-files-message">暂无文件，请上传</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 中间编辑器面板 -->
+        <div class="center-panel">
+            <div class="editor-header">
+                <div class="editor-title">
+                    <span>代码编辑器</span>
+                </div>
+                <div class="editor-controls">
+                    <select id="language-select">
+                        <option value="javascript">JavaScript</option>
+                        <option value="html">HTML</option>
+                        <option value="css">CSS</option>
+                        <option value="python">Python</option>
+                        <option value="java">Java</option>
+                    </select>
+                    <button class="run-btn" id="run-btn">运行</button>
+                    <button class="save-btn" id="save-btn">保存</button>
+                    <button class="explain-btn" id="explain-btn" title="为代码添加逐行解释">解释</button>
+                    <button class="fix-error-btn" id="fix-error-btn">修复错误</button>
+                    <button class="toggle-editor-btn" id="toggle-editor-btn">隐藏编辑器</button>
+                </div>
+            </div>
+            <div class="editor-container" id="editor-container">
+                <div class="code-editor" id="code-editor">
+                    <div class="line-numbers" id="line-numbers"></div>
+                    <textarea id="code-textarea" spellcheck="false" placeholder="// 在这里编写您的代码"></textarea>
+                </div>
+                <div class="error-panel" id="error-panel">
+                    <div class="error-header">
+                        <span>错误信息<div id="error-count"></div></span>
+                        <div class="header-controls">
+                            <button class="clear-ignores-btn" id="clear-ignores-btn" title="清除所有忽略的错误">清除忽略</button>
+                        <button class="close-error-btn" id="close-error-btn">×</button>
+                        </div>
+                    </div>
+                    <div class="error-content" id="error-content"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 右侧聊天面板 -->
+        <div class="right-panel">
+            <div class="chat-container">
+                <div class="messages" id="messages"></div>
+                <div id="loading" class="loading" style="display: none;">加载中...</div>
+                <div class="input-container">
+                    <button id="code-gen-btn" class="code-gen-btn" title="代码生成与补全">
+                        <span class="code-gen-icon">{ }</span>
+                    </button>
+                    <input id="chat-input" type="text" placeholder="输入相关内容..." />
+                    <button class="send-btn" onclick="sendMessage()">发送</button>
+                    <button class="upload-file-btn" id="upload-file-btn">上传文件</button>
+                    <div class="dropdown">
+                        <button onclick="toggleDropdown(event)" class="more-btn">更多</button>
+                        <div class="dropdown-content" id="dropdownMenu">
+                            <div class="dropdown-item" onclick="toggleTheme()">
+                                <span>浅色/深色</span>
+                            </div>
+                            <div class="dropdown-item" onclick="toggleEditor()">
+                                <span>显示/隐藏编辑器</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
